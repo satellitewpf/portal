@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianlala.msg.back.dao.CheckItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tianlala.msg.back.entity.CheckItem">
+        <id column="id" property="id" />
+        <result column="type_id" property="typeId" />
+        <result column="content" property="content" />
+        <result column="scoring_criteria" property="scoringCriteria" />
+        <result column="pic_url" property="picUrl" />
+        <result column="level" property="level" />
+        <result column="create_userid" property="createUserid" />
+        <result column="create_time" property="createTime" />
+        <result column="update_userid" property="updateUserid" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_del" property="isDel" />
+        <result column="upload_img_url" property="uploadImgUrl" />
+        <result column="upload_vedio_url" property="uploadVedioUrl" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, type_id, content, scoring_criteria, pic_url, level, create_userid, create_time, update_userid, update_time, is_del
+    </sql>
+
+    <select id="getReportDetailByReportId" resultMap="BaseResultMap">
+        SELECT  i.*,r.upload_img_url,r.upload_vedio_url,r.remark
+        from
+        tll_check_self_report_detail r LEFT JOIN tll_check_item i on r.check_item_id = i.id
+        where  r.report_id = #{reportId}
+    </select>
+
+</mapper>
